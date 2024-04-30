@@ -1,6 +1,7 @@
 import os
 import shutil
 import time
+import globe
 
 class DF():
 
@@ -10,7 +11,7 @@ class DF():
         self.LOGGER = logger
 
     def cleanup_dirs(self):
-        for root, dirs, files in os.walk(os.getcwd()):
+        for root, dirs, files in os.walk(globe.TLDN):
             for dir in dirs:
                 shutil.rmtree(os.path.join(root, dir))  # remove directory
 

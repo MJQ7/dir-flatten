@@ -1,5 +1,6 @@
 #User Defined
 **pyproject.toml
+**file[1-9].txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
