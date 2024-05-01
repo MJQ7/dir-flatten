@@ -1,6 +1,8 @@
 #User Defined
 **pyproject.toml
 **file[1-9].txt
+**.vscode
+**.venv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
