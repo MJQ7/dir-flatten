@@ -5,14 +5,14 @@ from rich.layout import Layout
 from rich.console import Console
 
 class UI():
+    
     @classmethod
-    def create_ui(self):
-        self.progress = self.create_progress_bar()
-        self.layout = self.create_layout(self.progress)
-        self.console = Console()
-        self.max_lines = 20
+    def create_ui(cls):
+        cls.progress = cls.create_progress_bar()
+        cls.layout = cls.create_layout(cls.progress)
+        cls.console = Console()
+        cls.max_lines = 20
 
-    @staticmethod
     def create_progress_bar():
         # Define the layout of the progress bar
         return Progress(
@@ -23,7 +23,6 @@ class UI():
             transient=True
         )
     
-    @staticmethod
     def create_layout(progress):
         layout = Layout()
         panel_progress = Panel(progress, title="Progress")
@@ -33,6 +32,5 @@ class UI():
         )
         return layout
 
-    @staticmethod
     def create_console():
         return Console()
