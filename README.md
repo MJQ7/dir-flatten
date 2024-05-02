@@ -8,6 +8,14 @@ A simple terminal utility that flattens a directory structure. It moves all file
 
 It's very rough around the edges, but it works.
 
+## Testing
+
+To execute the tests, run the following command:
+
+```bash
+python -m pytest
+```
+
 ## Features
 
 - Basic CLI interface

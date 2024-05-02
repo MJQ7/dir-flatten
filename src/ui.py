@@ -7,7 +7,7 @@ from rich.console import Console
 class UI():
     
     @classmethod
-    def create_ui(cls):
+    def create(cls):
         cls.progress = cls.create_progress_bar()
         cls.layout = cls.create_layout(cls.progress)
         cls.console = Console()

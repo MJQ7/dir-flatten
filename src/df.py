@@ -1,8 +1,8 @@
 import os
 import shutil
 import time
-import dir_flatten.globe
-from dir_flatten.logger import Logger
+from src.Config import Config
+from src.logger import Logger
 from rich import print
 
 class DF():
@@ -10,10 +10,12 @@ class DF():
     LOGGER = Logger.get()
 
     @staticmethod
-    def cleanup_dirs():
-        for root, dirs, files in os.walk(dir_flatten.globe.TLDN):
+    def cleanup():
+        Logger.write("[cyan]Cleaning up directories...")
+        for root, dirs, files in os.walk(Config.TLDN):
             for dir in dirs:
-                shutil.rmtree(os.path.join(root, dir))  # remove directory
+                shutil.rmtree(os.path.join(root, dir))
+        Logger.write("[green]Cleanup complete!\n")
 
     @staticmethod
     def remove_bad_files(files):
@@ -22,29 +24,27 @@ class DF():
 
     @staticmethod
     def get_files_in_directory(directory):
-        # List to store file names 
         files = []
+
         if not os.path.isdir(directory):
             print(f"[red]The directory {directory} does not exist.")
-            return []
+            return
         try:
-            # Walk through the directory 
-            for root, files_in_dir in os.walk(directory):
-                for file in files_in_dir:
-                    files.append(os.path.join(root, file))
+            for root, dirs, files_in_dir in os.walk(directory):
+                files.extend(os.path.join(root, file) for file in files_in_dir)
+            if not files:
+                print("[red]No files found in the directory!")
+                return []
+
         except Exception as e:
             print(f"[red]An error occurred: {e}")
             return []
-        cleaned = DF.remove_bad_files(files)
-        return cleaned
+        return DF.remove_bad_files(files)
 
     @staticmethod
     def move_file_to_top(file, dir):
-        # Get the file name
         file_name = os.path.basename(file)
-        # Get the directory name
         try:
-            # Move the file to the top level directory
             if('header' in file):
                 os.rename(file, os.path.join(dir, 'header_' + file_name))
                 DF.LOGGER.write("[yellow]Moved [white]" + file)

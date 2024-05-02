@@ -1,4 +1,5 @@
 from rich.panel import Panel
+from src.ui import UI
 
 class Logger():
     _instance = None
@@ -13,8 +14,8 @@ class Logger():
         return cls._instance
 
     @classmethod
-    def create(cls, layout):
-        cls.LAYOUT = layout
+    def create(cls):
+        cls.LAYOUT = UI.layout
         cls.write("[cyan]Starting...")
 
     @classmethod
